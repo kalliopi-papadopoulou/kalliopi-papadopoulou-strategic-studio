@@ -1,4 +1,4 @@
-# Kalliopi Papadopoulou |Strategic Transformation Studio & Advisory Hub
+# Kalliopi Papadopoulou|Strategic Transformation Studio & Advisory Hub
 > **Executive Advisory • Smart Travel Infrastructure • Predictive Biometrics • Frontline GenAI Enablement**
 An interactive, responsive strategic intelligence suite designed for luxury hospitality, transit sanctuaries, and enterprise digital transformation.
 ### 🔍 Strategic Focus & Core Frameworks
