@@ -24,10 +24,6 @@
  <!-- JSZip CDN for Portfolio Batch Export -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
- <!-- Google Calendar Appointment Scheduling Stylesheet & Script -->
- <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
- <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-
  <!-- Tailwind Custom Configuration -->
  <script>
  tailwind.config = {
@@ -110,11 +106,34 @@
  border: 2px solid #ffffff;
  }
 
- /* Print Briefing Styles */
+ /* Strict 1-Page Print Briefing Styles (Collapses Main Page Completely) */
  @media print {
- body * { visibility: hidden !important; }
- #printable-memo-area, #printable-memo-area * { visibility: visible !important; }
- #printable-memo-area { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; display: block !important; background: #ffffff !important; color: #000000 !important; padding: 20px !important; }
+ @page { size: A4 portrait; margin: 10mm; }
+ html, body {
+ background: #ffffff !important;
+ color: #000000 !important;
+ height: auto !important;
+ min-height: 0 !important;
+ overflow: visible !important;
+ margin: 0 !important;
+ padding: 0 !important;
+ }
+ header, main, footer, #lightbox-modal, #toast-container {
+ display: none !important;
+ height: 0 !important;
+ overflow: hidden !important;
+ }
+ #printable-memo-area {
+ display: block !important;
+ position: static !important;
+ width: 100% !important;
+ margin: 0 !important;
+ padding: 0 !important;
+ background: #ffffff !important;
+ color: #000000 !important;
+ page-break-after: avoid !important;
+ page-break-inside: avoid !important;
+ }
  }
  </style>
 </head>
@@ -198,9 +217,11 @@
  </div>
  </div>
 
+ <!-- Clean Retain Anchor (No Duplicate Calendar Mention in Intro) -->
  <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 items-center pt-5 border-t border-slate-800">
  <a href="#retain-section" class="px-4 py-2.5 bg-gradient-to-r from-gold-400 via-gold-500 to-amber-500 hover:from-gold-300 hover:to-gold-400 text-navy-900 font-bold rounded-lg text-xs uppercase tracking-wider transition flex items-center space-x-2 shadow-md shadow-gold-500/20">
- <span>Retain Advisory &amp; Calendar Booking ↓</span>
+ <span>Retain Advisory</span>
+ <span>↓</span>
  </a>
  <a href="#simulator" class="px-3.5 py-2.5 bg-navy-800 hover:bg-navy-750 text-gold-400 border border-gold-500/30 rounded-lg text-xs font-semibold uppercase tracking-wider transition">
  <span>Calibrate Market &amp; ROI ↓</span>
@@ -255,7 +276,7 @@
  <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
  <div class="flex items-center space-x-1.5">
  <span class="inline-flex items-center px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 font-mono text-[9px] font-semibold" title="Biometric Vector Verified Stamp Locked">
- 🔒 Biometrics Verified Stamp
+ 🔒 Biometrics Verified
  </span>
  <div class="flex items-center bg-navy-800 rounded border border-slate-700 p-0.5 text-[10px] font-mono">
  <button onclick="setCanvasAspect('1:1')" id="aspect-1-1" class="px-1.5 py-0.5 rounded bg-gold-500 text-navy-900 font-bold">1:1</button>
@@ -263,8 +284,9 @@
  </div>
  </div>
 
- <!-- Export Buttons (Always Stamped) -->
+ <!-- Export Buttons (PNG, JPG, WebP + 1-Page Case PDF) -->
  <div class="flex items-center space-x-1">
+ <button onclick="printFrameworkByIndex(selectedCanvasFrameworkIdx)" title="Print 1-Page HUD &amp; Framework Brief (PDF)" class="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] font-mono bg-gold-500 hover:bg-gold-400 text-navy-900 rounded transition font-bold shadow">PDF</button>
  <button onclick="exportPortrait('png')" class="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] font-mono bg-navy-800 hover:bg-gold-500 hover:text-navy-900 border border-slate-700 rounded transition font-semibold text-slate-300">PNG</button>
  <button onclick="exportPortrait('jpg')" class="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] font-mono bg-navy-800 hover:bg-gold-500 hover:text-navy-900 border border-slate-700 rounded transition font-semibold text-slate-300">JPG</button>
  <button onclick="exportPortrait('webp')" class="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] font-mono bg-navy-800 hover:bg-gold-500 hover:text-navy-900 border border-slate-700 rounded transition font-semibold text-slate-300">WebP</button>
@@ -274,7 +296,7 @@
  </div>
  </section>
 
- <!-- HARD-CODED COUNTRY / MARKET PRIVACY & REGULATORY SELECTOR BAR (ALWAYS VISIBLE) -->
+ <!-- COUNTRY / MARKET PRIVACY & REGULATORY SELECTOR BAR -->
  <section id="market-jurisdiction-bar" class="p-4 sm:p-5 rounded-2xl glass-card border-gold-500/40 shadow-lg">
  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
  <div class="space-y-1">
@@ -465,7 +487,7 @@
 
  </main>
 
- <!-- EXCLUSIVE GOOGLE CALENDAR EXECUTIVE BOOKING FOOTER -->
+ <!-- SINGLE, CLEAN GOOGLE CALENDAR EXECUTIVE BOOKING FOOTER -->
  <footer id="retain-section" class="border-t border-gold-500/30 bg-navy-950 text-slate-300 mt-16 pt-12 pb-10 w-full">
  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
  
@@ -480,7 +502,7 @@
  </p>
  </div>
 
- <!-- Centered Exclusive Google Calendar Appointment Hub -->
+ <!-- Centered Single-Action Google Calendar Appointment Hub -->
  <div class="bg-navy-900/90 p-6 sm:p-10 rounded-2xl border border-gold-500/40 space-y-6 shadow-2xl text-center">
  <div class="w-14 h-14 mx-auto rounded-full bg-gold-500/10 border border-gold-500/40 flex items-center justify-center text-gold-400 text-2xl">
  📅
@@ -492,13 +514,10 @@
  <p class="text-xs sm:text-sm text-slate-400">30 or 45-Minute Boardroom Scoping &amp; Strategic Advisory Session</p>
  </div>
 
- <!-- Google Calendar Scheduling Button Mount Point -->
- <div id="calendar-scheduling-slot" class="py-2 flex justify-center"></div>
-
- <!-- Primary Direct Redirect Button to Google Calendar -->
+ <!-- Single Clean Direct Redirect Button to Google Calendar -->
  <div class="pt-2">
- <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uiNR5ecqv24anAyZ3ISFoebqW7E7VPFRrJPW_VGWwg6qeIUeyFxFt4TaUu1V-XAp67crWhvXm?gv=true" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3.5 bg-gradient-to-r from-gold-400 via-gold-500 to-amber-500 hover:from-gold-300 hover:to-gold-400 text-navy-900 font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-gold-500/20 transition space-x-2">
- <span>Open Google Calendar Booking Portal</span>
+ <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uiNR5ecqv24anAyZ3ISFoebqW7E7VPFRrJPW_VGWwg6qeIUeyFxFt4TaUu1V-XAp67crWhvXm?gv=true" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gold-400 via-gold-500 to-amber-500 hover:from-gold-300 hover:to-gold-400 text-navy-900 font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-gold-500/20 transition space-x-2">
+ <span>Book Advisory Session (Google Calendar)</span>
  <span>↗</span>
  </a>
  </div>
@@ -525,7 +544,7 @@
  <h3 id="lightbox-title" class="text-sm sm:text-base font-bold text-white font-cinzel">Framework Title</h3>
  </div>
  <div class="flex flex-wrap items-center gap-1.5 sm:gap-2" onclick="event.stopPropagation()">
- <button onclick="printSingleFrameworkBrief()" class="px-2.5 py-1.5 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11px] font-mono rounded-lg transition font-bold shadow">Print Brief (PDF)</button>
+ <button onclick="printSingleFrameworkBrief()" class="px-2.5 py-1.5 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11px] font-mono rounded-lg transition font-bold shadow">Print HUD &amp; Brief (PDF)</button>
  <button onclick="exportSingleFrameworkDoc('md')" class="px-2.5 py-1.5 bg-navy-800 hover:bg-gold-500 hover:text-navy-900 text-[11px] font-mono rounded-lg border border-gold-500/40 transition font-semibold text-gold-400">Playbook (.MD)</button>
  <button onclick="exportSingleFrameworkDoc('json')" class="px-2.5 py-1.5 bg-navy-800 hover:bg-gold-500 hover:text-navy-900 text-[11px] font-mono rounded-lg border border-cyan-500/40 transition font-semibold text-cyan-400">Schema (.JSON)</button>
  <button onclick="downloadActiveModalGraphic('svg')" class="px-2.5 py-1.5 bg-navy-800 hover:bg-gold-500 hover:text-navy-900 text-[11px] font-mono rounded-lg border border-slate-700 transition font-semibold text-slate-200">SVG</button>
@@ -563,8 +582,8 @@
  <!-- Toast Notification Overlay -->
  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
- <!-- Printable Memo Target -->
- <div id="printable-memo-area" class="print-only hidden p-8 font-sans"></div>
+ <!-- Strictly 1-Page Printable Memo Target -->
+ <div id="printable-memo-area" class="hidden font-sans"></div>
 
  <script>
  /* =======================================================
@@ -770,27 +789,7 @@
  renderFrameworkGrid();
  recalcSimulator();
  renderPortraitCanvas();
- initGoogleCalendarScheduling();
  });
-
- function initGoogleCalendarScheduling() {
- const target = document.getElementById('calendar-scheduling-slot');
- if (!target) return;
- 
- const checkCalendar = setInterval(() => {
- if (window.calendar && calendar.schedulingButton) {
- calendar.schedulingButton.load({
- url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uiNR5ecqv24anAyZ3ISFoebqW7E7VPFRrJPW_VGWwg6qeIUeyFxFt4TaUu1V-XAp67crWhvXm?gv=true',
- color: '#c59b27',
- label: 'Book Advisory Session (Google Calendar)',
- target: target
- });
- clearInterval(checkCalendar);
- }
- }, 300);
-
- setTimeout(() => clearInterval(checkCalendar), 6000);
- }
 
  /* =======================================================
  3. MARKET JURISDICTION TOGGLE & PER-FRAMEWORK CALCULATOR
@@ -1380,11 +1379,12 @@
  <p class="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed font-light">${fw.summary}</p>
  </div>
 
- <!-- Live Calibrated Case Bar (Distinct HUD snapshot button) -->
+ <!-- Live Calibrated Case Bar with BOTH [HUD] and 1-Page [PDF] -->
  <div id="live-spec-bar-${fw.id}" class="mt-2 px-2.5 py-1.5 rounded-lg bg-navy-900/95 border border-gold-500/30 flex items-center justify-between text-[10px] font-mono text-emerald-400">
  <span class="truncate" title="${live.metricPrimary}">${live.badge}</span>
  <div class="flex items-center space-x-1 ml-1 shrink-0">
- <button onclick="sendFrameworkToCanvas(${index})" title="Project this Framework Case onto Visual HUD" class="px-2 py-0.5 rounded bg-gold-500 text-navy-900 font-bold transition">HUD</button>
+ <button onclick="sendFrameworkToCanvas(${index})" title="Present this Case on Visual HUD" class="px-1.5 py-0.5 rounded bg-navy-800 hover:bg-gold-500 text-slate-300 hover:text-navy-900 border border-slate-700 font-bold transition">HUD</button>
+ <button onclick="printFrameworkByIndex(${index})" title="Print 1-Page Visual HUD &amp; Framework Brief (PDF)" class="px-1.5 py-0.5 rounded bg-gold-500 text-navy-900 hover:bg-gold-400 font-bold transition">PDF</button>
  </div>
  </div>
  
@@ -1774,10 +1774,11 @@
  }
 
  /* =======================================================
- 7. SINGLE-FRAMEWORK BRIEF (PDF), PLAYBOOK (.MD), SCHEMA (.JSON) & ZIP
+ 7. STRICT 1-PAGE VISUAL HUD + FRAMEWORK BRIEF (PDF)
  ======================================================= */
  function printFrameworkByIndex(idx) {
  activeModalIndex = idx;
+ selectHudFramework(idx);
  printSingleFrameworkBrief();
  }
 
@@ -1786,64 +1787,94 @@
  const live = computeFrameworkLiveSpecs(fw.id);
  const { vol, lat, ai, trust, market } = getSimulatorState();
  const area = document.getElementById('printable-memo-area');
- const visualMarkup = userUploadedImages[fw.id]
- ? `<img src="${userUploadedImages[fw.id]}" style="max-height: 210px; border-radius: 8px; border: 1px solid #ccc;" />`
- : `<div style="background: #060d17; padding: 14px; border-radius: 8px; display: inline-block; width: 100%; max-width: 460px;">${fw.svgGen('tech')}</div>`;
+
+ // Sync the Visual Case HUD Canvas to this exact framework and capture its snapshot image
+ const prevMode = currentCanvasMode;
+ currentCanvasMode = 'hud';
+ selectHudFramework(activeModalIndex);
+ renderPortraitCanvas();
+ const canvas = document.getElementById('portrait-canvas');
+ const hudSnapshotDataUrl = canvas ? canvas.toDataURL('image/png', 0.92) : '';
+ currentCanvasMode = prevMode;
+ renderPortraitCanvas();
 
  area.innerHTML = `
- <div style="font-family: 'Inter', sans-serif; max-width: 780px; margin: 0 auto; color: #111;">
- <div style="border-bottom: 3px solid #c59b27; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
+ <div style="font-family: 'Inter', sans-serif; max-width: 740px; margin: 0 auto; color: #111; box-sizing: border-box;">
+ <!-- Header -->
+ <div style="border-bottom: 2.5px solid #c59b27; padding-bottom: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-end;">
  <div>
- <h1 style="margin: 0; font-size: 20px; color: #0a192f;">KALLIOPI PAPADOPOULOU</h1>
- <p style="margin: 3px 0 0; font-size: 11px; color: #555; text-transform: uppercase;">Strategic Planning • Luxury Tourism Transformation • AI Architecture</p>
+ <h1 style="margin: 0; font-size: 18px; color: #0a192f; font-weight: 800; letter-spacing: 0.5px;">KALLIOPI PAPADOPOULOU</h1>
+ <p style="margin: 2px 0 0; font-size: 10px; color: #555; text-transform: uppercase;">Strategic Planning • Luxury Tourism Transformation • AI Architecture</p>
  </div>
- <div style="text-align: right; font-size: 10px; color: #444; font-family: monospace;">
- <strong>${market.flag} ${market.name.toUpperCase()}</strong><br>BIOMETRIC VECTOR VERIFIED (&lt;180ms ZKP)
- </div>
- </div>
-
- <div style="margin-bottom: 14px;">
- <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #b08920; font-weight: bold;">${fw.tag} • ${fw.focus}</span>
- <h2 style="margin: 4px 0 6px; font-size: 21px; color: #0a192f;">${fw.title}</h2>
- <p style="margin: 0; font-size: 12px; color: #333;"><strong>Deliverable Artifact:</strong> ${live.deliverableName}</p>
- </div>
-
- <div style="text-align: center; margin: 14px 0; padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
- ${visualMarkup}
- </div>
-
- <div style="background: #0a192f; color: #fff; padding: 14px 16px; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid #c59b27;">
- <div style="font-size: 10px; text-transform: uppercase; color: #facc15; letter-spacing: 1px; margin-bottom: 4px;">Market-Calibrated Output — ${market.flag} ${market.name}</div>
- <div style="font-size: 15px; font-weight: bold; color: #34d399; font-family: monospace;">${live.metricPrimary}</div>
- <div style="font-size: 12px; color: #e2e8f0; margin-top: 4px;">${live.metricSecondary}</div>
- <div style="font-size: 11px; color: #fde047; margin-top: 6px; font-family: monospace;">✓ ${live.privacyAdjust}</div>
- <div style="font-size: 10px; color: #94a3b8; margin-top: 8px; padding-top: 6px; border-top: 1px solid #1e293b; font-family: monospace;">
- Sandbox Inputs: Volume = ${vol.toLocaleString()}/mo | Edge Latency = ${lat}ms | GenAI Adoption = ${ai}% | Privacy Vault = Tier ${trust}
+ <div style="text-align: right; font-size: 9.5px; color: #0a192f; font-family: monospace; font-weight: bold;">
+ ${market.flag} ${market.name.toUpperCase()}<br>
+ <span style="color: #059669;">✓ BIOMETRIC VECTOR VERIFIED (&lt;180ms ZKP)</span>
  </div>
  </div>
 
- <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 18px;">
+ <!-- Case Title & Deliverable -->
+ <div style="margin-bottom: 10px;">
+ <span style="font-size: 9.5px; text-transform: uppercase; letter-spacing: 1px; color: #b08920; font-weight: bold;">CASE 0${activeModalIndex + 1} • ${fw.tag} (${fw.focus})</span>
+ <h2 style="margin: 2px 0 4px; font-size: 18px; color: #0a192f;">${fw.title}</h2>
+ <p style="margin: 0; font-size: 11px; color: #333;"><strong>Executive Deliverable:</strong> ${live.deliverableName}</p>
+ </div>
+
+ <!-- Visual Case HUD Snapshot + Framework Architecture Diagram Side by Side -->
+ <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px;">
+ <div style="text-align: center;">
+ <div style="font-size: 9px; font-family: monospace; color: #475569; margin-bottom: 4px; font-weight: bold;">VISUAL CASE HUD PRESENTATION</div>
+ <img src="${hudSnapshotDataUrl}" style="max-height: 200px; width: auto; max-width: 100%; border-radius: 6px; border: 1px solid #94a3b8;" />
+ </div>
+ <div style="text-align: center;">
+ <div style="font-size: 9px; font-family: monospace; color: #475569; margin-bottom: 4px; font-weight: bold;">ARCHITECTURE TOPOLOGY (${currentGlobalMode.toUpperCase()})</div>
+ <div style="background: #060d17; padding: 8px; border-radius: 6px; display: inline-block; width: 100%; box-sizing: border-box;">
+ ${fw.svgGen('tech')}
+ </div>
+ </div>
+ </div>
+
+ <!-- Live Calibrated Output Banner -->
+ <div style="background: #0a192f; color: #fff; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; border-left: 4px solid #c59b27;">
+ <div style="font-size: 9.5px; text-transform: uppercase; color: #facc15; letter-spacing: 0.8px; margin-bottom: 3px;">4. Market &amp; Simulator Calibrated Output — ${market.flag} ${market.name}</div>
+ <div style="font-size: 13.5px; font-weight: bold; color: #34d399; font-family: monospace;">⚡ ${live.metricPrimary}</div>
+ <div style="font-size: 11px; color: #e2e8f0; margin-top: 3px;">${live.metricSecondary}</div>
+ <div style="font-size: 10px; color: #fde047; margin-top: 4px; font-family: monospace;">🔒 ${live.privacyAdjust}</div>
+ <div style="font-size: 9.5px; color: #94a3b8; margin-top: 6px; padding-top: 5px; border-top: 1px solid #1e293b; font-family: monospace;">
+ Active Simulator Inputs: Monthly Arrivals = ${vol.toLocaleString()} | Biometric Latency = ${lat}ms | Frontline GenAI = ${ai}% | Privacy Vault = Tier ${trust}
+ </div>
+ </div>
+
+ <!-- Complete Framework Sections Table -->
+ <table style="width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 12px;">
  <tr>
- <td style="padding: 9px; border: 1px solid #cbd5e1; background: #f8fafc; width: 28%; font-weight: bold; color: #0a192f;">1. Strategic Objective</td>
- <td style="padding: 9px; border: 1px solid #cbd5e1;">${fw.summary}</td>
+ <td style="padding: 7px 9px; border: 1px solid #cbd5e1; background: #f1f5f9; width: 28%; font-weight: bold; color: #0a192f;">1. Strategic Objective</td>
+ <td style="padding: 7px 9px; border: 1px solid #cbd5e1; color: #1e293b;">${fw.summary}</td>
  </tr>
  <tr>
- <td style="padding: 9px; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: bold; color: #0a192f;">2. Baseline KPI Target</td>
- <td style="padding: 9px; border: 1px solid #cbd5e1;">${fw.kpi}</td>
+ <td style="padding: 7px 9px; border: 1px solid #cbd5e1; background: #f1f5f9; font-weight: bold; color: #0a192f;">2. Executive Indicator (KPI)</td>
+ <td style="padding: 7px 9px; border: 1px solid #cbd5e1; color: #1e293b;">${fw.kpi}</td>
  </tr>
  <tr>
- <td style="padding: 9px; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: bold; color: #0a192f;">3. Market Privacy &amp; Biometrics</td>
- <td style="padding: 9px; border: 1px solid #cbd5e1;">${fw.risk}<br><strong>Jurisdiction Mandate:</strong> ${market.privacyRegime} (${market.dataResidency})</td>
+ <td style="padding: 7px 9px; border: 1px solid #cbd5e1; background: #f1f5f9; font-weight: bold; color: #0a192f;">3. Privacy &amp; Risk Safeguard</td>
+ <td style="padding: 7px 9px; border: 1px solid #cbd5e1; color: #1e293b;">
+ ${fw.risk}<br>
+ <strong>Jurisdiction Regime:</strong> ${market.privacyRegime} (${market.dataResidency})<br>
+ <strong>Governance Focus:</strong> ${market.governanceFocus}
+ </td>
  </tr>
  </table>
 
- <div style="margin-top: 20px; font-size: 10px; color: #0a192f; font-weight: bold; border-top: 2px solid #c59b27; padding-top: 8px; display: flex; justify-content: space-between;">
- <span>© 2026 KALLIOPI PAPADOPOULOU • BIOMETRIC VECTOR VERIFIED ARCHITECTURE</span>
+ <!-- Locked Biometrics Verified Footer -->
+ <div style="margin-top: 10px; font-size: 9.5px; color: #0a192f; font-weight: bold; border-top: 2px solid #c59b27; padding-top: 6px; display: flex; justify-content: space-between;">
+ <span>© 2026 KALLIOPI PAPADOPOULOU • BIOMETRIC VECTOR VERIFIED (&lt;180ms ZKP)</span>
  <span>MOVEMENT. ALWAYS FORWARD.</span>
  </div>
  </div>
  `;
+
+ setTimeout(() => {
  window.print();
+ }, 120);
  }
 
  function exportSingleFrameworkDoc(format) {
@@ -1890,11 +1921,13 @@ ${JSON.stringify(live.schemaPayload, null, 2)}
 ---
 *© 2026 Kalliopi Papadopoulou. All rights reserved. Biometric Telemetry Verified (<180ms ZKP).*
 `;
- const blob = new Blob([mdContent], { type: 'text/plain;charset=utf-8' });
+ const blob = new Blob([mdContent], { type: 'application/octet-stream' });
  const a = document.createElement('a');
  a.href = URL.createObjectURL(blob);
  a.download = `${safeName}_Playbook.md`;
+ document.body.appendChild(a);
  a.click();
+ document.body.removeChild(a);
  URL.revokeObjectURL(a.href);
  showToast(`Exported Playbook (.MD)`, 'success');
  } else if (format === 'json') {
@@ -1929,11 +1962,13 @@ ${JSON.stringify(live.schemaPayload, null, 2)}
  technical_parameters: live.schemaPayload
  }
  };
- const blob = new Blob([JSON.stringify(jsonPayload, null, 2)], { type: 'application/json;charset=utf-8' });
+ const blob = new Blob([JSON.stringify(jsonPayload, null, 2)], { type: 'application/octet-stream' });
  const a = document.createElement('a');
  a.href = URL.createObjectURL(blob);
  a.download = `${safeName}_Schema.json`;
+ document.body.appendChild(a);
  a.click();
+ document.body.removeChild(a);
  URL.revokeObjectURL(a.href);
  showToast(`Exported Schema (.JSON)`, 'success');
  }
@@ -1966,7 +2001,7 @@ ${JSON.stringify(live.schemaPayload, null, 2)}
  } else {
  folder.file(`${sanitized}_Stamped.svg`, fw.svgGen('tech'));
  }
- folder.file(`${sanitized}_Spec_${market.code.toUpperCase()}.json`, JSON.stringify(live.schemaPayload, null, 2));
+ folder.file(`${sanitized}_Spec_${market.code.toUpperCase()}.txt`, JSON.stringify(live.schemaPayload, null, 2));
  });
 
  const content = await zip.generateAsync({ type: 'blob' });
