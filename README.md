@@ -22,7 +22,7 @@ This platform moves beyond static consulting decks by providing board members, C
 * **Jurisdiction-Aware Governance:** Dynamically calibrates operational outputs and compliance guardrails across five global regulatory regimes (**EU / Greece**, **Switzerland / DACH**, **UAE / GCC**, **APAC**, and **North America**).
 ---
 ## Core Capabilities & Technical Components
-* **Zero-Dependency Simulation Engine 
+**Zero-Dependency Simulation Engine 
 
 ### 1. 8 Dynamic Strategic Frameworks (Dual-Mode Vector Topologies)
 Interactive architectural blueprints featuring instant toggling between **Executive Pitch View** and **Data Architecture View**:
