@@ -20,18 +20,6 @@ This platform moves beyond static consulting decks by providing board members, C
 * **Dual-Track Guest Orchestration:** Models auxiliary Smart Travel Hub arrival sanctuaries for VIP and autonomous transit flows while preserving traditional front-office operations for standard guests.
 * **Privacy-by-Design & Zero PCI-DSS Footprint:** Enforces local cryptographic hashing (`512d` vector templates), ephemeral Zero-Knowledge Proof (ZKP) tokenization, and zero raw biometric raster persistence.
 * **Jurisdiction-Aware Governance:** Dynamically calibrates operational outputs and compliance guardrails across five global regulatory regimes (**EU / Greece**, **Switzerland / DACH**, **UAE / GCC**, **APAC**, and **North America**).
-
-## 🛠️ Tech Stack & Architectural Engine
-
-* **Zero-Dependency Simulation Engine (Vanilla ES6+ JS):** Real-time mathematical calibration linking 4 operational sliders (*Monthly Arrivals Volume*, *Biometric Edge Latency*, *Frontline GenAI Adoption*, and *Zero-Breach Vault Isolation*) across 8 hospitality & governance frameworks.
-* **Multi-Jurisdiction Privacy & Biometric Compliance Matrix:** Dynamic regulatory switching across **🇪🇺 EU/Greece** (*GDPR, EU AI Act, eIDAS 2.0 EUDI Wallet*), **🇨🇭 Switzerland/DACH** (*Swiss revDSG / FADP*), **🇦🇪 UAE/GCC** (*PDPL & Smart Gates*), **🌏 APAC** (*PIPA / PDPA*), and **🇺🇸 North America** (*CCPA / BIPA / PCI-DSS 4.0*).
-* **Interactive Visual Case HUD (`HTML5 Canvas 2D API`):** Live 3-stage architectural topology renderer (`1:1` Square & `16:9` Widescreen) with optional background image blending and permanently locked biometric verification & IP attribution seals (`PNG`, `JPG`, `WebP`).
-* **Dual-Mode Procedural Vector Engine (`Inline SVG`):** Instant toggle between **Executive Pitch View** and **Data Architecture View** across all 8 frameworks.
-* **Client-Side Deliverable Generators (`JSZip`, `Blob API`, `@media print`):**
-  * **1-Page Executive Brief (`PDF`):** Single-page boardroom brief combining the Visual Case HUD snapshot, vector topology, and market-calibrated KPIs.
-  * **Implementation Playbooks (`.MD`) & Data Schemas (`.JSON` / `.TXT`):** Ready-to-deploy operational playbooks and API telemetry contracts.
-  * **Batch Portfolio Bundler (`JSZip 3.10.1`):** One-click `.ZIP` packaging of all stamped visual and technical assets.
-* **Direct Executive Scheduling:** Integrated with **Google Calendar Appointment Schedule** for C-suite consultations.
 ---
 ## Core Capabilities & Technical Components
 * **Zero-Dependency Simulation Engine 
@@ -64,7 +52,6 @@ Real-time calibration sliders (**Monthly Arrivals Volume**, **Biometric Edge Lat
 * **Locked Biometric & IP Seal:** Permanently embeds copyright attribution and the **`✓ BIOMETRIC VECTOR VERIFIED (<180ms ZKP) • ZERO RAW PII`** verification stamp across all exported `SVG`, `PNG`, `JPG`, `WebP`, `PDF`, `.MD`, `.JSON`, and batch `.ZIP` artifacts.
 
 ---
-
 ## Author & Executive Advisory Portfolio
 
 **Kalliopi Papadopoulou**  
